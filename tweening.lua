@@ -1,4 +1,11 @@
 local timer = 0 -- Ne pas retirer !!!!!!!!!!!
+
+
+--WARNING: In order to use this function, you need to copy/paste this instruction before 
+--the draw of you concerned image:
+    --love.graphics.setColor(255, 255, 255, alpha)
+--And then Draw the Image...
+    --love.graphics.draw(your_image, 0, 0)    
 function fadeInAndOut(timeLimitFadeIn, timeLimitIdle, timeLimitFadeOut, dt) 
     
     timer = timer + dt --le timer s'incrémente de 1 toutes les secondes
