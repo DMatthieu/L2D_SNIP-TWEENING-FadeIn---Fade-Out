@@ -1,21 +1,15 @@
+require "tweening"
+
 function love.load()
-    timer = 0
     alpha = 0
  
-    fadein  = 2
-    display = 7
-    fadeout = 9
+    teamSplashScreen = love.graphics.newImage("T713_logo.jpg")
+    trMenuScreen = love.graphics.newImage("logo_fiche.png")
 
-    menuImg = love.graphics.newImage("tomb_003.png")
- 
  end
+
  function love.update(dt)
-   --[[ timer=timer+dt
- 
-   if timer<fadein then alpha=timer/fadein
-   elseif timer<display then alpha=1
-   elseif timer<fadeout then alpha=1-((timer-display)/(fadeout-display))
-   else alpha=0 end ]]
+
     if love.keyboard.isDown("a") then
         if alpha < 0 then 
             alpha = 0
@@ -30,13 +24,16 @@ function love.load()
         end
     end
 
+    fadeInAndOut(1, 1, 1, dt)
+
  end
 
- function love.draw()
+ function love.draw(dt)
     love.graphics.setColor(255, 255, 255, alpha)
-    love.graphics.draw(menuImg, 0, 0)
+    love.graphics.draw(teamSplashScreen, 0, 0)
 
-    love.graphics.setColor(100,100,100)
-    love.graphics.print("Valeur Alpha = "..alpha, 30, 530)
-
+    love.graphics.setColor(100, 100, 100)
+    love.graphics.print("alpha= "..alpha, 20, 280)
+    
+    love.graphics.reset()
  end
