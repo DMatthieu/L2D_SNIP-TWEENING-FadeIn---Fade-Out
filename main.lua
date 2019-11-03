@@ -1,39 +1,34 @@
-require "tweening"
+require "custom_libs/tweening"
+require "custom_libs/timer"
 
 function love.load()
-    alpha = 0
- 
-    teamSplashScreen = love.graphics.newImage("T713_logo.jpg")
-    trMenuScreen = love.graphics.newImage("logo_fiche.png")
+   alpha = 0
+   splash_timer = 0
+    
+   teamSplashScreen = love.graphics.newImage("img/T713_logo.jpg")
+   trMenuScreen = love.graphics.newImage("img/logo_fiche.png")
+
 
  end
 
  function love.update(dt)
+   update_timer(splash_timer, dt)
 
-    if love.keyboard.isDown("a") then
-        if alpha < 0 then 
-            alpha = 0
-        else
-            alpha = alpha - 0.01
-        end
-    elseif love.keyboard.isDown("z") then
-        if alpha > 1 then 
-            alpha = 1
-        else
-            alpha = alpha + 0.01
-        end
-    end
+   fadeInAndOut(1, 1, 1, dt)
 
-    fadeInAndOut(1, 1, 1, dt)
+   --Quit game with ESCAPE
+   if love.keyboard.isDown("escape") then
+      love.event.quit()
+   end
 
  end
 
  function love.draw(dt)
-    love.graphics.setColor(255, 255, 255, alpha)
-    love.graphics.draw(teamSplashScreen, 0, 0)
+   love.graphics.setColor(255, 255, 255, alpha)
+   love.graphics.draw(teamSplashScreen, 0, 0)
+   love.graphics.reset()
 
-    love.graphics.setColor(100, 100, 100)
-    love.graphics.print("alpha= "..alpha, 20, 280)
+   love.graphics.print(splash_timer, 10, 10)
+
     
-    love.graphics.reset()
  end
